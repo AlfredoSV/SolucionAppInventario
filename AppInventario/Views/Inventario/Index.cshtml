@@ -1,0 +1,152 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model IndexModel
+
+<a asp-action="Nuevo" class="btn btn-success mb-2">Nuevo producto</a>
+
+<div class="table-responsive" style="height: 320px;">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Edad</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Compañia</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Productos.Count == 0)
+            {
+                <tr><td colspan="6" class="text-center">Sin datos</td></tr>
+            }
+            else
+            {
+                @foreach (var item in Model.Productos)
+                {
+                    <tr>
+                        <th scope="row">@item.Id</th>
+                        <td>@item.Nombre</td>
+                        <td>@item.RestriccionEdad</td>
+                        <td>@item.Precio</td>
+                        <td>@item.Compania</td>
+                        <td><a asp-action="Editar" asp-route-id="@item.Id">Editar</a> | <a href="#" id="@item.Id" onclick="eliminarProducto(this)" >Eliminar</a> | <a href="#" id="@item.Id" onclick="detalleProducto(this)">Detalle</a></td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+<nav>
+    <ul class="pagination">
+
+        @if (IndexModel.Pg.Anterior)
+        {
+
+            <li class="page-item">
+                <a class="page-link" asp-page-handler="/" asp-route-pagina="@(IndexModel.Pg.Pagina_Actual-1)" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Anterior</span>
+                </a>
+            </li>
+
+        }
+        else
+        {
+            <li class="page-item disabled">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Anterior</span>
+                </a>
+            </li>
+
+        }
+
+
+        @for (int i = IndexModel.Pg.Min_Bloque; i <= (IndexModel.Pg.Total_Paginas <= IndexModel.Pg.Max_Bloque ? IndexModel.Pg.Total_Paginas : IndexModel.Pg.Max_Bloque); i++)
+        {
+            @if (i == IndexModel.Pg.Pagina_Actual)
+            {
+                <li class="page-item active"><a asp-route-pagina="@i" class="page-link" asp-page-handler="/">@i</a></li>
+            }
+            else
+            {
+                <li class="page-item"><a asp-route-pagina="@i" class="page-link" asp-page-handler="/">@i</a></li>
+            }
+
+
+        }
+
+
+
+        @if (IndexModel.Pg.Siguiente)
+        {
+
+
+            <li class="page-item">
+                <a class="page-link" asp-page-handler="/" asp-route-pagina="@(IndexModel.Pg.Pagina_Actual+1)" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Siguiente</span>
+                </a>
+            </li>
+        }
+        else
+        {
+            <li class="page-item disabled">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Siguiente</span>
+                </a>
+            </li>
+        }
+
+
+
+
+    </ul>
+</nav>
+
+
+<div class="modal fade" id="modalDetalleProducto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitulo">Detalle de producto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="bodyDetalleProducto">
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="modalEliminarProducto">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Eliminar producto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro que quiere eliminar este producto?</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#" id="eliminarBtn" class="btn btn-danger">Eliminar</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>

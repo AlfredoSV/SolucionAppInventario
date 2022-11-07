@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.30" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.30" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WebApiInventario.Aplicacion\WebApiInventario.Aplicacion.csproj" />
+    <ProjectReference Include="..\WebApiInventario.Dominio\WebApiInventario.Dominio.csproj" />
+    <ProjectReference Include="..\WebApiInventario.Infraestructura\WebApiInventario.Infraestructura.csproj" />
+  </ItemGroup>
+
+
+</Project>

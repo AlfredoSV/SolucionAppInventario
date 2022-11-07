@@ -1,0 +1,52 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model ProductoModel
+
+<form asp-action="CrearNuevoProducto" method="post" enctype="multipart/form-data" style="width:300px; height:auto;">
+    <h3>Nuevo - Producto</h3>
+
+    <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" asp-for="Nombre" class="form-control" id="nombre">
+        <span class="text-danger" asp-validation-for="Nombre"></span>
+    </div>
+    <div class="form-group">
+        <label for="precio">Precio</label>
+        <input  type="number" step="any" value="0.00" asp-for="Precio" class="form-control" id="precio">
+        <span class="text-danger" asp-validation-for="Precio"></span>
+
+    </div>
+    <div class="form-group">
+        <label for="compania">Compañia</label>
+        <input type="text" asp-for="Compania" class="form-control" id="compania">
+        <span class="text-danger" asp-validation-for="Compania"></span>
+
+    </div>
+    <div class="form-group">
+        <label for="restriccionEdad">Restricción Edad</label>
+        <input type="number" step="1"  inputmode="numeric" asp-for="RestriccionEdad" class="form-control" id="restriccionEdad">
+        <span class="text-danger" asp-validation-for="RestriccionEdad"></span>
+
+    </div>
+    <div class="custom-file form-group mt-2 mb-4">
+        <input type="file" asp-for="Imagen" accept="image/png"  class="custom-file-input form-control-sm">
+        <label class="custom-file-label" for="customFileLangHTML" data-browse="Seleccionar">Imagen</label>
+        <span class="text-danger" asp-validation-for="Imagen"></span>
+
+
+    </div>
+    <div class="form-group">
+        <label for="descripcion">Descripción</label>
+        <textarea asp-for="Descripcion" id="descripcion" class="form-control" cols="20" rows="8"></textarea>
+        <span class="text-danger" asp-validation-for="Descripcion"></span>
+
+
+    </div>
+
+    <div class="form-group">
+
+        <a asp-action="Index" class="btn btn-danger mr-2 mb-5 float-right">Cancelar</a>
+        <button type="submit" class="btn btn-primary mb-5 mr-2 float-right">Guardar</button>
+    </div>
+</form>
