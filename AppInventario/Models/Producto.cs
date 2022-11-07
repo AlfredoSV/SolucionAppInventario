@@ -52,7 +52,7 @@ namespace AppInventario.Models
             Id = id;
             Nombre = nombre;
             Descripcion = descripcion;
-            RestriccionEdad = restriccionEdad;
+            RestriccionEdad =restriccionEdad;
             Compania = compania;
             Precio = precio;
             Imagen = imagen;
