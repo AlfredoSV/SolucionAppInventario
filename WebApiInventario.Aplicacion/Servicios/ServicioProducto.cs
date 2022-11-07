@@ -59,7 +59,8 @@ namespace WebApiInventario.Aplicacion.Servicios
 
         public void GuardarProducto(DtoProducto dtoProducto)
         {
-            dtoProducto.Imagen = "data:image/png;base64," + dtoProducto.Imagen;
+            if(dtoProducto.Imagen != string.Empty)
+                dtoProducto.Imagen = "data:image/png;base64," + dtoProducto.Imagen;
             var producto = Producto.CrearProducto(dtoProducto);
             this._RepositorioProductos.Crear(producto);
         }

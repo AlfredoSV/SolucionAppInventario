@@ -34,8 +34,9 @@ namespace WebApiInventario.Dominio.Entidades
             if (nombre.Length > 50)
                 throw new ExcepcionComun("Nombre incorrecto", "El nombre no puede tener una longitud mayor a 50 caracteres");
             Nombre = nombre;
-            if (descripcion.Length > 100)
-                throw new ExcepcionComun("Descripción incorrecto", "El descripción no puede tener una longitud mayor a 100 caracteres");
+            if(descripcion != null)
+                if (descripcion.Length > 100)
+                    throw new ExcepcionComun("Descripción incorrecto", "El descripción no puede tener una longitud mayor a 100 caracteres");
 
             Descripcion = descripcion;
 
